@@ -3,12 +3,22 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}">
-    <head>
-    </head>
-    <body>
-        <section layout:fragment="content">
-            <h2 th:text="#{home.welcome}">Willkommen zu unserem Videoshop.</h2>
-            <p sec:authorize="isAuthenticated()" th:text="${'Hallo ' + #authentication?.name}">Hallo Nutzer</p>
-        </section>
-    </body>
+<head>
+</head>
+<body>
+<section layout:fragment="content">
+    <h2 th:text="#{home.welcome}">Willkommen zu unserem Videoshop.</h2>
+
+    <p sec:authorize="isAuthenticated()" th:text="${'Hallo ' + #authentication?.name}">Hallo Nutzer</p>
+
+    <div sec:authorize="isAuthenticated()">
+        <th:block th:with="birthDateOpt=${@customerInfoService.getCurrentCustomerBirthDate()}">
+            <p th:if="${birthDateOpt.isPresent()}">
+                Dein Geburtsdatum: <span th:text="${#temporals.format(birthDateOpt.get(), 'dd.MM.yyyy')}">01.01.1990</span>
+            </p>
+        </th:block>
+    </div>
+
+</section>
+</body>
 </html>

@@ -15,6 +15,7 @@ q * Copyright 2017-2019 the original author or authors.
  */
 package videoshop.customer;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.salespointframework.core.DataInitializer;
@@ -81,10 +82,10 @@ class CustomerDataInitializer implements DataInitializer {
 		var password = "123";
 
 		List.of(//
-				new RegistrationForm("hans", password, "wurst"),
-				new RegistrationForm("dextermorgan", password, "Miami-Dade County"),
-				new RegistrationForm("earlhickey", password, "Camden County - Motel"),
-				new RegistrationForm("mclovinfogell", password, "Los Angeles")//
+				new RegistrationForm("hans", password, "wurst", LocalDate.parse("2020-01-08")),
+				new RegistrationForm("dextermorgan", password, "Miami-Dade County", LocalDate.parse("2000-01-08")),
+				new RegistrationForm("earlhickey", password, "Camden County - Motel", LocalDate.parse("2000-02-08")),
+				new RegistrationForm("mclovinfogell", password, "Los Angeles", LocalDate.parse("2000-03-08"))//
 		).forEach(customerManagement::createCustomer);
 	}
 }

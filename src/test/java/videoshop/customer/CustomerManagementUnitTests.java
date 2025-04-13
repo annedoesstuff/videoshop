@@ -25,6 +25,8 @@ import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
 
+import java.time.LocalDate;
+
 /**
  * Unit tests for {@link CustomerManagement}.
  *
@@ -50,7 +52,7 @@ class CustomerManagementUnitTests {
 
 		// When
 		// … a registration form is submitted
-		RegistrationForm form = new RegistrationForm("name", "password", "address");
+		RegistrationForm form = new RegistrationForm("name", "password", "address", LocalDate.parse("2020-01-08"));
 		Customer customer = customerManagement.createCustomer(form);
 
 		// Then

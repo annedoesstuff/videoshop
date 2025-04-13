@@ -24,6 +24,8 @@ import videoshop.customer.Customer.CustomerIdentifier;
 import java.io.Serializable;
 import java.util.UUID;
 
+import java.time.LocalDate;
+
 import org.jmolecules.ddd.types.Identifier;
 import org.salespointframework.core.AbstractAggregateRoot;
 import org.salespointframework.useraccount.UserAccount;
@@ -37,7 +39,7 @@ import org.salespointframework.useraccount.UserAccount;
 public class Customer extends AbstractAggregateRoot<CustomerIdentifier> {
 
 	private @EmbeddedId CustomerIdentifier id = new CustomerIdentifier();
-
+	private LocalDate birthDate;
 	private String address;
 
 	// (｡◕‿◕｡)
@@ -49,9 +51,10 @@ public class Customer extends AbstractAggregateRoot<CustomerIdentifier> {
 	@SuppressWarnings("unused")
 	private Customer() {}
 
-	public Customer(UserAccount userAccount, String address) {
+	public Customer(UserAccount userAccount, String address, LocalDate birthDate) {
 		this.userAccount = userAccount;
 		this.address = address;
+		this.birthDate = birthDate; // Init
 	}
 
 	/*
@@ -62,6 +65,9 @@ public class Customer extends AbstractAggregateRoot<CustomerIdentifier> {
 	public CustomerIdentifier getId() {
 		return id;
 	}
+
+	public LocalDate getBirthDate() {return birthDate;}
+	public void setBirthDate(LocalDate birthDate) {this.birthDate = birthDate;}
 
 	public String getAddress() {
 		return address;

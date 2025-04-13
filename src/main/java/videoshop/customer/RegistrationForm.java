@@ -19,6 +19,11 @@ import jakarta.validation.constraints.NotEmpty;
 
 import org.springframework.validation.Errors;
 
+import java.time.LocalDate;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past; // für Validierung (Datum muss in Vergangenheit liegen)
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * This is a so called form-backing class to prepare the form display (in
  * {@link CustomerController#register(org.springframework.ui.Model, RegistrationForm)}) and during form submission (in
@@ -49,17 +54,24 @@ import org.springframework.validation.Errors;
 class RegistrationForm {
 
 	private final @NotEmpty String name, password, address;
+	@NotNull(message = "Geburtsdatum darf nicht leer sein.")
+	@Past(message = "Geburtsdatum muss in der Vergangenheit liegen.")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private final LocalDate birthDate;
 
-	public RegistrationForm(String name, String password, String address) {
+	public RegistrationForm(String name, String password, String address, LocalDate birthDate) {
 
 		this.name = name;
 		this.password = password;
 		this.address = address;
+		this.birthDate = birthDate;
 	}
 
 	public String getName() {
 		return name;
 	}
+
+	public LocalDate getBirthDate() {return birthDate;}
 
 	public String getPassword() {
 		return password;

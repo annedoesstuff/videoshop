@@ -30,6 +30,13 @@
                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Das Passwort darf
                         nicht leer sein.</p>
                 </div>
+                <div class="field" th:classappend="${#fields.hasErrors('birthDate')}? 'error' : ''">
+                    <label for="birthDate">Geburtsdatum</label>
+                    <input id="birthDate" name="birthDate" th:field="*{birthDate}" type="date" required="required"/>
+                    <div class="ui negative message" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">
+                        <p>Bitte geben Sie ein gültiges Geburtsdatum an.</p>
+                    </div>
+                </div>
                 <div class="field">
                     <label th:text="#{register.address}" for="address">Straße</label>
                     <input id="address" name="address" th:field="*{address}" th:errorclass="fieldError" type="text"

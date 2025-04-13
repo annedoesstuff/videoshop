@@ -19,6 +19,8 @@ import videoshop.customer.Customer.CustomerIdentifier;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Streamable;
+import org.salespointframework.useraccount.UserAccount;
+import java.util.Optional;
 
 /**
  * A repository interface to manage {@link Customer} instances.
@@ -33,4 +35,6 @@ interface CustomerRepository extends CrudRepository<Customer, CustomerIdentifier
 	 */
 	@Override
 	Streamable<Customer> findAll();
+
+	Optional<Customer> findByUserAccount(UserAccount userAccount);
 }
